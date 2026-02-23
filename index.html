@@ -11,6 +11,7 @@
             --dark: #1a1a1a;
             --light: #ffffff;
             --gray: #f4f4f4;
+            --gold: #f39c12;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
@@ -60,14 +61,17 @@
         .card h3 { margin: 15px 0 5px; font-size: 20px; }
         .price { color: var(--primary); font-weight: bold; font-size: 18px; }
 
-        /* About Section */
-        .about-box { background: var(--dark); color: white; padding: 40px; border-radius: 15px; }
-        .brands-flex { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; font-weight: bold; color: var(--primary); }
+        /* Hiring Section Styling */
+        .hiring-form-box { max-width: 600px; margin: 0 auto; background: #1a1a1a; padding: 40px; border-radius: 20px; border: 1px solid #333; text-align: left; }
+        .hiring-form-box input, .hiring-form-box select { background: #222; border: 1px solid #444; color: white; width: 100%; padding: 12px; margin: 10px 0 20px; border-radius: 8px; }
+        .hiring-form-box label { color: var(--gold); font-weight: bold; }
 
         /* Delivery Form */
         .delivery-form { max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
+        
         .order-btn { background: #25d366; color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .apply-btn { background: var(--gold); color: #000; padding: 15px; width: 100%; border: none; border-radius: 8px; font-weight: 900; cursor: pointer; text-transform: uppercase; }
 
         footer { background: #111; color: #777; padding: 30px; text-align: center; }
 
@@ -88,6 +92,7 @@
             <li><a href="#electronics">Electronics</a></li>
             <li><a href="#furniture">Furniture</a></li>
             <li><a href="#delivery">Delivery</a></li>
+            <li><a href="#hiring">Jobs</a></li>
             <li><a href="#about">About</a></li>
         </ul>
     </nav>
@@ -151,10 +156,38 @@
         </div>
     </section>
 
+    <section id="hiring" style="background: #000; color: #fff; padding: 100px 10%;">
+        <h2 style="color: var(--gold);">Join Our Team</h2>
+        <p style="color: #ccc; margin-bottom: 30px; font-size: 18px;">Staff hiring for Savitri Electronics & Furniture.</p>
+
+        <div class="hiring-form-box">
+            <label>Pura Naam (Full Name)</label>
+            <input type="text" id="empName" placeholder="Enter Name">
+
+            <label>Mobile Number</label>
+            <input type="number" id="empPhone" placeholder="Enter Phone">
+
+            <label>Aapka Pata (Address)</label>
+            <input type="text" id="empAddress" placeholder="Village/City">
+
+            <label>Experience</label>
+            <select id="empExp">
+                <option value="Fresher">Fresher</option>
+                <option value="1-2 Years">1-2 Saal</option>
+                <option value="3+ Years">3+ Saal</option>
+            </select>
+
+            <label>Expected Salary</label>
+            <input type="text" id="empSalary" placeholder="Salary Expectation">
+
+            <button class="apply-btn" onclick="applyJob()">Submit Application <i class="fas fa-paper-plane"></i></button>
+        </div>
+    </section>
+
     <section id="about">
         <div class="about-box">
             <h2>About Our Showroom</h2>
-            <p>Savitri Electronics & Furniture, Rudrapur (Deoria) mein pichle 5 saalon se logon ka bharosa hai. Hum high-quality products aur best service deliver karte hain.</p>
+            <p>Savitri Electronics & Furniture, Rudrapur (Deoria). Hum premium brands ke saath deal karte hain.</p>
             <div class="brands-flex">
                 <span>SAMSUNG</span> | <span>LG</span> | <span>GODREJ</span> | <span>SONY</span> | <span>WHIRLPOOL</span>
             </div>
@@ -166,15 +199,29 @@
     </footer>
 
     <script>
+        // Function for Delivery Orders
         function sendToWhatsApp() {
             let name = document.getElementById('name').value;
             let phone = document.getElementById('phone').value;
             let address = document.getElementById('address').value;
-            if(!name || !phone || !address) { alert("Please fill all details"); return; }
+            if(!name || !phone || !address) { alert("Please fill details"); return; }
             
-            let message = `*New Order from Website*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}`;
-            let url = `https://wa.me/917080935352?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+            let message = `*New Order*\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}`;
+            window.open(`https://wa.me/917080935352?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Function for Job Applications
+        function applyJob() {
+            let name = document.getElementById('empName').value;
+            let phone = document.getElementById('empPhone').value;
+            let address = document.getElementById('empAddress').value;
+            let exp = document.getElementById('empExp').value;
+            let salary = document.getElementById('empSalary').value;
+
+            if(!name || !phone || !address) { alert("Important details bhariye!"); return; }
+
+            let message = `*Job Application*\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}\n*Experience:* ${exp}\n*Salary:* ${salary}`;
+            window.open(`https://wa.me/917080935352?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
 </body>
